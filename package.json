@@ -1,0 +1,31 @@
+{
+  "name": "figma-to-notion-sync",
+  "version": "1.0.0",
+  "description": "CLI tool to sync Figma design tokens to Notion database",
+  "main": "dist/index.js",
+  "scripts": {
+    "sync-figma-to-notion": "ts-node src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "keywords": [
+    "figma",
+    "notion",
+    "design-tokens",
+    "sync"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@notionhq/client": "^2.2.15",
+    "dotenv": "^16.4.5",
+    "form-data": "^4.0.4",
+    "sharp": "^0.33.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.24",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}
