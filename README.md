@@ -323,6 +323,77 @@ Updated: 33
 - API errors are logged with details
 - Missing environment variables cause the tool to exit with an error message
 
+## Troubleshooting
+
+### MCP Mode Issues
+
+**"MCP server is only available if your active tab is a design or FigJam file"**
+- Make sure you have a Figma design file open (not just the Figma app)
+- Ensure the file is a design file, not a FigJam file (unless using FigJam-specific tools)
+
+**"MCP variable definitions not provided"**
+- The sync function expects MCP tool results to be passed in
+- When using from Cursor's AI context, the AI should call MCP tools first
+- Check that MCP tools are available in your Cursor setup
+
+**No tokens found**
+- Verify your Figma file has variables/styles defined
+- Check that you're selecting the right node (try root page node ID: `"0:1"`)
+- Ensure MCP tools are returning data
+
+**Color swatch images not displaying**
+- Verify `IMGBB_API_KEY` is set in your `.env` file
+- Check that the API key is valid (get a free one from https://api.imgbb.com/)
+- Ensure your Notion database has an "Image" column of type "Files & media"
+- Color images are only generated for tokens categorized as "Color"
+
+**Invalid hex color errors**
+- The tool automatically handles RGBA hex colors (e.g., `#1f1f1f00` → `#1f1f1f`)
+- If you see errors, check that color values are in valid hex format (`#RRGGBB` or `#RRGGBBAA`)
+
+### REST API Mode Issues
+
+**"file_variables:read scope not available"**
+- Some Figma token types don't support this scope
+- Consider using MCP mode instead (`USE_MCP=true`)
+
+**"Object not found" errors**
+- Verify your `FIGMA_FILE_KEY` is correct (found in the Figma file URL)
+- Ensure your Figma token has access to the file
+
+### Notion Integration Issues
+
+**"Object not found" or "Unauthorized" errors**
+- Verify your `NOTION_TOKEN` is correct
+- Ensure your Notion database is shared with the integration:
+  1. Open your Notion database
+  2. Click "..." (three dots) in the top right
+  3. Select "Add connections"
+  4. Find and select your integration
+
+**Database schema errors**
+- Ensure your Notion database has all required properties (see "Notion Database Schema" section above)
+- Property names must match exactly (case-sensitive)
+
+## MCP Mode Advantages & Limitations
+
+### Advantages
+
+- ✅ No Figma API token needed
+- ✅ No scope/permission issues
+- ✅ Works with any Figma file you have open
+- ✅ Can use currently selected node automatically
+- ✅ Direct access to Figma's variable system
+- ✅ Automatically generates and uploads color swatch images (with `IMGBB_API_KEY`)
+
+### Limitations
+
+- ⚠️ Requires Figma desktop app to be running
+- ⚠️ Requires running from Cursor's AI context (not pure CLI)
+- ⚠️ MCP tools must be available in your Cursor setup
+
+**Note:** If you want to use MCP mode from a pure CLI (without AI assistance), you would need to set up an MCP client library to connect to the Figma MCP server and call MCP tools programmatically. The current implementation provides the structure for this, but requires an MCP client library to be integrated.
+
 ## Future Enhancements
 
 - Support for multiple Figma files
