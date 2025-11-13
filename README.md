@@ -1,4 +1,4 @@
-# Figma to Notion Design Token Sync CLI
+# Figma to Notion Design Token Sync
 
 A TypeScript CLI tool that synchronizes Figma design tokens (Variables and Styles) into a Notion database. Uses Figma ID as the primary key to determine whether to create new pages or update existing ones.
 

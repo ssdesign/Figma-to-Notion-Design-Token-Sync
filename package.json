@@ -1,7 +1,7 @@
 {
-  "name": "figma-to-notion-sync",
+  "name": "figma-to-notion-design-token-sync",
   "version": "1.0.0",
-  "description": "CLI tool to sync Figma design tokens to Notion database",
+  "description": "Figma to Notion Design Token Sync - CLI tool to sync Figma design tokens to Notion database",
   "main": "dist/index.js",
   "scripts": {
     "sync-figma-to-notion": "ts-node src/index.ts",
