@@ -210,8 +210,10 @@ MCP mode doesn't require a Figma token or file key. Instead:
 
 1. **Have Figma Desktop App Open**: Make sure the Figma desktop app is running with your design file open
 2. **Select a Node** (optional): You can select a specific node/page in Figma, or use the root page
-3. **Run from Cursor**: The sync can be initiated from Cursor's chat interface where MCP tools are available
+3. **Use Cursor Chat**: Simply ask the AI assistant in Cursor to sync Figma tokens to Notion (see "Usage" section below for details)
 4. **Or Use Node ID**: Provide `FIGMA_NODE_ID` in your `.env` (e.g., `"1234:56789"` or `"0:1"` for page root)
+
+**Note:** MCP mode **cannot** be used with the CLI command (`npm run sync-figma-to-notion`). You must use Cursor's chat interface where MCP tools are available.
 
 **MCP Tools Used:**
 - `mcp_Figma_Desktop_get_variable_defs` - Gets variable definitions
@@ -264,11 +266,41 @@ Without an API key, color tokens will sync but won't have images in the Image pr
 
 ## Usage
 
+There are two ways to run the sync:
+
+### Method 1: Using Cursor Chat (Recommended for MCP Mode)
+
+This is the recommended way when using MCP mode (`USE_MCP=true`). The AI assistant in Cursor can directly call MCP tools to fetch Figma data.
+
+1. **Open your Figma file** in the Figma desktop app
+2. **Select the root page or a specific node** that contains your design tokens
+3. **In Cursor chat**, simply ask:
+   - "Sync Figma design tokens to Notion"
+   - "Use MCP to get Figma variables and sync them to Notion"
+   - "Sync Figma tokens to Notion using MCP"
+
+The AI assistant will:
+1. Call `mcp_Figma_Desktop_get_variable_defs` to get variable definitions
+2. Call `mcp_Figma_Desktop_get_metadata` to get styles (if needed)
+3. Process the data and sync it to your Notion database
+
+**Advantages:**
+- ✅ No Figma API token needed
+- ✅ Works with any Figma file you have open
+- ✅ Can use currently selected node automatically
+- ✅ Direct access to Figma's variable system
+
+### Method 2: Using CLI Command (REST API Mode Only)
+
+This method works with REST API mode (`USE_MCP=false`) and requires a Figma API token.
+
 Run the sync command:
 
 ```bash
 npm run sync-figma-to-notion
 ```
+
+**Note:** This method will **not work** with MCP mode. If you have `USE_MCP=true` in your `.env`, the CLI will show an error. Use Cursor chat instead for MCP mode.
 
 The tool will:
 1. Fetch all variables and styles from the specified Figma file
