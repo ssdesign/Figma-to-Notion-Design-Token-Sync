@@ -60,7 +60,7 @@ NOTION_TOKEN=secret_your_notion_integration_token_here
 # Your Notion database ID
 # Found in the database URL: https://www.notion.so/workspace/DATABASE_ID?v=...
 # Can be with or without dashes - the code will format it automatically
-NOTION_DB_ID=aksj84yhsjki8mjah739rehj876wyj8u
+NOTION_DB_ID=dhsj92kjshri6pjeh498lakj183duh7c
 
 # ============================================
 # Image Hosting Configuration (Optional but Recommended)
